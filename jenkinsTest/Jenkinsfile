@@ -1,0 +1,23 @@
+pipeline {
+  agent any
+  tools {
+    nodejs 'Node11.0.0'
+  }
+
+  options {
+    timeout(time: 2, unit: 'MINUTES')
+  }
+
+  stages {
+    stage('Install dependencies') {
+      steps {
+        sh 'cd jenkinsTest && npm i'
+      }
+    }
+    stage('Run tests') {
+      steps {
+        sh 'cd jenkinsTest && npm t'
+      }
+    }
+  }
+}
